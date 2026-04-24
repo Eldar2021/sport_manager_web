@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>TableFlow — Прототип</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; min-height: 100%; }
+  body {
+    font-family: 'Inter', -apple-system, system-ui, sans-serif;
+    background: #EDEEF1;
+    -webkit-font-smoothing: antialiased;
+    color: #0F172A;
+  }
+  button { font-family: inherit; }
+  /* scrollbar */
+  ::-webkit-scrollbar { width: 0; height: 0; }
+
+  /* Shimmer skeleton */
+  @keyframes shimmer {
+    0%   { background-position: -400px 0; }
+    100% { background-position: 400px 0; }
+  }
+  .skeleton {
+    background: linear-gradient(90deg, #e2e8f0 25%, #f1f5f9 50%, #e2e8f0 75%);
+    background-size: 800px 100%;
+    animation: shimmer 1.4s infinite linear;
+    border-radius: 10px;
+  }
+
+  /* Pulsing dot */
+  @keyframes pulse-ring {
+    0%   { box-shadow: 0 0 0 0px rgba(239,68,68,0.4); }
+    70%  { box-shadow: 0 0 0 7px rgba(239,68,68,0); }
+    100% { box-shadow: 0 0 0 0px rgba(239,68,68,0); }
+  }
+  .dot-pulse { animation: pulse-ring 1.5s ease-out infinite; }
+
+  /* Green flash */
+  @keyframes green-flash {
+    0%   { background-color: #dcfce7; }
+    20%  { background-color: #bbf7d0; }
+    100% { background-color: #ffffff; }
+  }
+  .just-freed { animation: green-flash 5s ease-out forwards; }
+
+  /* Toast slide-up */
+  @keyframes toast-in {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .toast { animation: toast-in 200ms ease-out forwards; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel" src="tokens.jsx"></script>
+<script type="text/babel" src="ui.jsx"></script>
+<script type="text/babel" src="screens1.jsx"></script>
+<script type="text/babel" src="screens2.jsx"></script>
+<script type="text/babel" src="screens3.jsx"></script>
+<script type="text/babel" src="ios-frame.jsx"></script>
+
+<script type="text/babel">
+const TWEAKS = /*EDITMODE-BEGIN*/{
+  "role": "manager",
+  "themeName": "warm"
+}/*EDITMODE-END*/;
+
+const SCREENS_OWNER = [
+  ['welcome', '01 Приветствие'],
+  ['login', '02 Вход'],
+  ['role', '03 Выбор роли'],
+  ['registerOwner', '04 Регистрация · Владелец'],
+  ['firstVenueSetup', '04c Первый зал · Онбординг'],
+  ['home', '05 Главная'],
+  ['venuePicker', '06 Выбор зала'],
+  ['table', '07/08 Карточка стола'],
+  ['payment', '09 Итоги оплаты'],
+  ['settings', '10 Настройки'],
+  ['venueMgmt', '11 Залы'],
+  ['tableMgmt', '12 Столы'],
+  ['tableDetail', '12b Редактировать стол'],
+  ['reports', '13 Отчёты'],
+  ['managerMgmt', '14 Менеджеры'],
+  ['subscription', '15 Подписка'],
+  ['resetPassword', '16 Смена пароля'],
+];
+
+const SCREENS_MANAGER = [
+  ['welcome', '01 Приветствие'],
+  ['login', '02 Вход'],
+  ['registerManager', '03 Регистрация · Менеджер'],
+  ['home', '04 Главная'],
+  ['venuePicker', '05 Выбор зала'],
+  ['table', '06 Карточка стола'],
+  ['payment', '07 Итоги оплаты'],
+  ['settings', '08 Профиль'],
+  ['resetPassword', '09 Смена пароля'],
+];
+
+function App() {
+  const [role, setRole] = React.useState(TWEAKS.role || 'manager');
+  const [themeName, setThemeName] = React.useState(TWEAKS.themeName || 'classic');
+  const [screen, setScreen] = React.useState('home');
+  const [showVenuePicker, setShowVenuePicker] = React.useState(false);
+  const [currentVenue, setCurrentVenue] = React.useState(TF_VENUES[0]);
+  const [tables, setTables] = React.useState(TF_TABLES);
+  const [activeTableId, setActiveTableId] = React.useState(null);
+  const [editTable, setEditTable] = React.useState(null);
+  const [paymentData, setPaymentData] = React.useState(null);
+  const [now, setNow] = React.useState(Date.now());
+  const [tweaksOpen, setTweaksOpen] = React.useState(false);
+  const [editModeActive, setEditModeActive] = React.useState(false);
+  const [toast, setToast] = React.useState(null);
+  const showToast = React.useCallback((msg) => {
+    setToast({ msg, id: Date.now() });
+  }, []);
+  React.useEffect(() => {
+    if (!toast) return;
+    const t = setTimeout(() => setToast(null), 3000);
+    return () => clearTimeout(t);
+  }, [toast?.id]);
+
+  // tick for live timers
+  React.useEffect(() => {
+    const id = setInterval(() => setNow(Date.now()), 1000);
+    return () => clearInterval(id);
+  }, []);
+
+  // persist screen in localStorage
+  React.useEffect(() => {
+    const saved = localStorage.getItem('tf_screen');
+    const allScreens = role === 'owner' ? SCREENS_OWNER : SCREENS_MANAGER;
+    if (saved && allScreens.find(s => s[0] === saved)) setScreen(saved);
+  }, []);
+  React.useEffect(() => { localStorage.setItem('tf_screen', screen); }, [screen]);
+
+  // tweaks wiring
+  React.useEffect(() => {
+    function onMsg(e) {
+      if (!e.data || typeof e.data !== 'object') return;
+      if (e.data.type === '__activate_edit_mode') setEditModeActive(true);
+      else if (e.data.type === '__deactivate_edit_mode') setEditModeActive(false);
+    }
+    window.addEventListener('message', onMsg);
+    window.parent.postMessage({ type: '__edit_mode_available' }, '*');
+    return () => window.removeEventListener('message', onMsg);
+  }, []);
+
+  const updateRole = (r) => {
+    setRole(r);
+    window.parent.postMessage({ type: '__edit_mode_set_keys', edits: { role: r } }, '*');
+  };
+  const updateTheme = (t) => {
+    setThemeName(t);
+    window.parent.postMessage({ type: '__edit_mode_set_keys', edits: { themeName: t } }, '*');
+  };
+
+  const theme = TF_THEMES[themeName] || TF_THEMES.classic;
+  const activeTable = tables.find(t => t.id === activeTableId) || tables[0];
+
+  const TAB_SCREENS = ['home', 'reports', 'settings'];
+  const showNav = TAB_SCREENS.includes(screen);
+
+  // Render current screen
+  let screenEl = null;
+  const go = (s) => setScreen(s);
+
+  if (screen === 'welcome')       screenEl = <ScreenWelcome theme={theme} go={go} role={role}/>;
+  else if (screen === 'login')    screenEl = <ScreenLogin theme={theme} go={go}/>;
+  else if (screen === 'role')     screenEl = <ScreenRoleSelect theme={theme} go={go} setRole={updateRole} role={role}/>;
+  else if (screen === 'registerOwner')   screenEl = <ScreenRegisterOwner theme={theme} go={go}/>;
+  else if (screen === 'firstVenueSetup') screenEl = <ScreenFirstVenueSetup theme={theme} go={go}/>;
+  else if (screen === 'registerManager') screenEl = <ScreenRegisterManager theme={theme} go={go}/>;
+  else if (screen === 'home')     screenEl = <ScreenHome theme={theme} go={go} role={role}
+    tables={tables} setTables={setTables} currentVenue={currentVenue} now={now}
+    openVenuePicker={() => setShowVenuePicker(true)} setActiveTableId={setActiveTableId}/>;
+  else if (screen === 'table')    screenEl = <ScreenTable theme={theme} go={go} table={activeTable}
+    setTables={setTables} now={now} setPaymentData={setPaymentData}/>;
+  else if (screen === 'settings') screenEl = <ScreenSettings theme={theme} go={go} role={role}/>;
+  else if (screen === 'venueMgmt')   screenEl = <ScreenVenueMgmt theme={theme} go={go}/>;
+  else if (screen === 'tableMgmt')   screenEl = <ScreenTableMgmt theme={theme} go={go} tables={tables} setTables={setTables} setEditTable={setEditTable}/>;
+  else if (screen === 'tableDetail') screenEl = <ScreenTableDetail theme={theme} go={go} tables={tables} setTables={setTables} editTable={editTable}/>;
+  else if (screen === 'reports')     screenEl = <ScreenReports theme={theme} go={go} currentVenue={currentVenue} setCurrentVenue={setCurrentVenue}/>;
+  else if (screen === 'managerMgmt') screenEl = <ScreenManagerMgmt theme={theme} go={go} showToast={showToast}/>;
+  else if (screen === 'subscription')screenEl = <ScreenSubscription theme={theme} go={go}/>;
+  else if (screen === 'resetPassword')screenEl = <ScreenResetPassword theme={theme} go={go}/>;
+
+  // screens that render as modal overlays on top of others
+  let overlay = null;
+  if (screen === 'venuePicker' || showVenuePicker) {
+    overlay = <ScreenVenuePicker theme={theme} role={role} currentVenue={currentVenue}
+      setCurrentVenue={setCurrentVenue} close={() => { setShowVenuePicker(false); if (screen === 'venuePicker') go('home'); }}/>;
+  }
+  else if (screen === 'payment') {
+    const baseTable = <ScreenTable theme={theme} go={go} table={activeTable}
+      setTables={setTables} now={now} setPaymentData={setPaymentData}/>;
+    screenEl = baseTable;
+    overlay = <ScreenPayment theme={theme} go={go} paymentData={paymentData}
+      tables={tables} setTables={setTables} showToast={showToast}/>;
+  }
+
+  return (
+    <div style={{
+      minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center',
+      gap: 16, padding: '24px 16px', background: '#EDEEF1',
+    }}>
+      {/* Header with screen selector */}
+      <div style={{
+        width: '100%', maxWidth: 1100,
+        display: 'flex', alignItems: 'center', gap: 16, flexWrap: 'wrap',
+      }}>
+        <div>
+          <div style={{ fontFamily: 'Inter', fontSize: 20, fontWeight: 800, letterSpacing: -0.5 }}>
+            TableFlow <span style={{ color: '#64748B', fontWeight: 500 }}>— Прототип</span>
+          </div>
+          <div style={{ fontFamily: 'Inter', fontSize: 12, color: '#64748B', marginTop: 2 }}>
+            Роль: <b>{role === 'owner' ? 'Владелец' : 'Менеджер'}</b> · Тема: <b>{theme.name}</b> · RU
+          </div>
+        </div>
+        <div style={{ flex: 1 }}/>
+        <select value={screen} onChange={(e) => setScreen(e.target.value)} style={{
+          padding: '10px 14px', borderRadius: 10, border: '1px solid #CBD5E1',
+          background: '#fff', fontFamily: 'Inter', fontSize: 14, fontWeight: 600,
+          color: '#0F172A', cursor: 'pointer', minWidth: 260,
+        }}>
+          {SCREENS.map(([k,l]) => <option key={k} value={k}>{l}</option>)}
+        </select>
+      </div>
+
+      {/* Device frame */}
+      <div style={{ display: 'flex', gap: 20, alignItems: 'flex-start', flexWrap: 'wrap', justifyContent: 'center' }}>
+        <div style={{
+          width: 402, height: 874, borderRadius: 48, overflow: 'hidden',
+          position: 'relative', background: theme.bg,
+          boxShadow: '0 40px 80px rgba(0,0,0,0.18), 0 0 0 1px rgba(0,0,0,0.12)',
+        }}>
+          {/* dynamic island */}
+          <div style={{
+            position: 'absolute', top: 11, left: '50%', transform: 'translateX(-50%)',
+            width: 126, height: 37, borderRadius: 24, background: '#000', zIndex: 200,
+            pointerEvents: 'none',
+          }}/>
+          {/* status bar */}
+          <div style={{ position: 'absolute', top: 0, left: 0, right: 0, zIndex: 20, pointerEvents: 'none' }}>
+            <IOSStatusBar dark={false}/>
+          </div>
+          <div style={{ height: '100%', position: 'relative' }}>
+            <div style={{ height: showNav ? 'calc(100% - 72px)' : '100%', position: 'relative' }}>
+              {screenEl}
+              {overlay}
+            </div>
+            {showNav && <TFBottomNav current={screen} go={go} role={role} theme={theme}/>}
+            {/* Toast */}
+            {toast && (
+              <div key={toast.id} className="toast" style={{
+                position: 'absolute', bottom: showNav ? 88 : 24, left: 16, right: 16, zIndex: 500,
+                background: '#0F172A', color: '#fff', padding: '12px 16px',
+                borderRadius: 14, fontFamily: 'Inter', fontSize: 14, fontWeight: 500,
+                display: 'flex', alignItems: 'center', gap: 10,
+                boxShadow: '0 8px 24px rgba(0,0,0,0.25)',
+              }}>
+                <span style={{ color: '#22C55E', display: 'flex' }}><Icon.check/></span>
+                {toast.msg}
+              </div>
+            )}
+          </div>
+          {/* home indicator */}
+          <div style={{
+            position: 'absolute', bottom: 0, left: 0, right: 0, zIndex: 60,
+            height: 34, display: 'flex', justifyContent: 'center', alignItems: 'flex-end',
+            paddingBottom: 8, pointerEvents: 'none',
+          }}>
+            <div style={{ width: 139, height: 5, borderRadius: 100, background: 'rgba(0,0,0,0.25)' }}/>
+          </div>
+        </div>
+
+        {/* Flow hint panel */}
+        <div style={{
+          width: 280, background: '#fff', borderRadius: 16, padding: 18,
+          border: '1px solid #E2E8F0',
+          fontFamily: 'Inter', fontSize: 13, color: '#334155', lineHeight: 1.55,
+        }}>
+          <div style={{ fontWeight: 800, fontSize: 14, color: '#0F172A', marginBottom: 12 }}>
+            Ключевые потоки
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+            <FlowStep n="1" label="Главная" onClick={() => setScreen('home')}/>
+            <FlowStep n="2" label="Карточка стола → НАЧАТЬ" onClick={() => setScreen('table')}/>
+            <FlowStep n="3" label="Итоги оплаты" onClick={() => setScreen('payment')}/>
+            <FlowStep n="4" label="Отчёты (для владельца)" onClick={() => setScreen('reports')}/>
+            <FlowStep n="5" label="Менеджеры · код приглашения" onClick={() => setScreen('managerMgmt')}/>
+          </div>
+          <div style={{
+            marginTop: 16, padding: 12, background: '#F1F5F9', borderRadius: 10,
+            fontSize: 12, color: '#475569',
+          }}>
+            💡 Нажмите на «свободный» стол, затем <b>НАЧАТЬ</b>, чтобы запустить таймер. Стол «2» уже активен — откройте его и проверьте итоги оплаты.
+          </div>
+        </div>
+      </div>
+
+      {/* Tweaks panel */}
+      {editModeActive && (
+        <TweaksPanel
+          role={role} setRole={updateRole}
+          themeName={themeName} setThemeName={updateTheme}
+        />
+      )}
+    </div>
+  );
+}
+
+function FlowStep({ n, label, onClick }) {
+  return (
+    <button onClick={onClick} style={{
+      background: 'transparent', border: 'none', padding: 0, cursor: 'pointer',
+      display: 'flex', alignItems: 'center', gap: 10, textAlign: 'left',
+    }}>
+      <div style={{
+        width: 22, height: 22, borderRadius: 999, background: '#1E88E5',
+        color: '#fff', fontSize: 11, fontWeight: 700, fontFamily: 'Inter',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+      }}>{n}</div>
+      <span style={{ fontFamily: 'Inter', fontSize: 13, color: '#334155', fontWeight: 500 }}>{label}</span>
+    </button>
+  );
+}
+
+function TweaksPanel({ role, setRole, themeName, setThemeName }) {
+  return (
+    <div style={{
+      position: 'fixed', right: 20, bottom: 20, zIndex: 1000,
+      background: '#fff', borderRadius: 16, padding: 16,
+      boxShadow: '0 20px 40px rgba(0,0,0,0.18), 0 0 0 1px rgba(0,0,0,0.08)',
+      width: 260, fontFamily: 'Inter',
+    }}>
+      <div style={{ fontSize: 14, fontWeight: 800, marginBottom: 14, color: '#0F172A' }}>Tweaks</div>
+
+      <div style={{ fontSize: 11, fontWeight: 600, color: '#64748B', textTransform: 'uppercase', letterSpacing: 0.5, marginBottom: 8 }}>Роль</div>
+      <div style={{ display: 'flex', gap: 6, marginBottom: 14 }}>
+        {[['manager','Менеджер'],['owner','Владелец']].map(([k,l]) => (
+          <button key={k} onClick={() => setRole(k)} style={{
+            flex: 1, padding: '8px 10px', borderRadius: 8,
+            background: role === k ? '#0F172A' : '#F1F5F9',
+            color: role === k ? '#fff' : '#334155',
+            border: 'none', cursor: 'pointer',
+            fontSize: 13, fontWeight: 600,
+          }}>{l}</button>
+        ))}
+      </div>
+
+      <div style={{ fontSize: 11, fontWeight: 600, color: '#64748B', textTransform: 'uppercase', letterSpacing: 0.5, marginBottom: 8 }}>Тема</div>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+        {Object.entries(TF_THEMES).map(([k, t]) => (
+          <button key={k} onClick={() => setThemeName(k)} style={{
+            padding: '10px 12px', borderRadius: 10,
+            background: themeName === k ? '#F1F5F9' : '#fff',
+            border: `1.5px solid ${themeName === k ? t.primary : '#E2E8F0'}`,
+            cursor: 'pointer', fontSize: 13, fontWeight: 600,
+            display: 'flex', alignItems: 'center', gap: 10,
+          }}>
+            <div style={{ display: 'flex', gap: 3 }}>
+              <div style={{ width: 14, height: 14, borderRadius: 4, background: t.primary }}/>
+              <div style={{ width: 14, height: 14, borderRadius: 4, background: t.success }}/>
+              <div style={{ width: 14, height: 14, borderRadius: 4, background: t.danger }}/>
+            </div>
+            <span style={{ flex: 1, textAlign: 'left' }}>{t.name}</span>
+            {themeName === k && <span style={{ color: t.primary }}>✓</span>}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>
