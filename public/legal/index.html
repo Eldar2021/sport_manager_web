@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DuLa — Information</title>
+<meta name="description" content="DuLa information hub: marketing, privacy policy, account deletion and support.">
+<meta name="robots" content="index, follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" href="./assets/logo.svg">
+<link rel="stylesheet" href="./assets/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="bar">
+    <a class="brand" href="./index.html"><img src="./assets/logo.svg" alt="">
+      <span>DuLa<small data-i18n="brand_sub">Digital hall management</small></span></a>
+    <span class="spacer"></span>
+    <div class="lang-switch" role="group" aria-label="Language">
+      <button type="button" data-lang="en" aria-pressed="true">EN</button>
+      <button type="button" data-lang="ru" aria-pressed="false">РУС</button>
+      <button type="button" data-lang="ky" aria-pressed="false">КЫР</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <h1 data-i18n="title">DuLa — Information</h1>
+  <p class="meta" data-i18n="subtitle">Official pages for the DuLa mobile app.</p>
+
+  <a class="card" style="display:block;text-decoration:none;color:inherit" href="./marketing.html">
+    <h2 style="margin-top:0" data-i18n="m_t">About DuLa</h2>
+    <p data-i18n="m_d">What DuLa does, features and pricing.</p>
+  </a>
+  <a class="card" style="display:block;text-decoration:none;color:inherit" href="./privacy.html">
+    <h2 style="margin-top:0" data-i18n="p_t">Privacy Policy</h2>
+    <p data-i18n="p_d">What data we collect, how we use it, and your rights.</p>
+  </a>
+  <a class="card" style="display:block;text-decoration:none;color:inherit" href="./account-deletion.html">
+    <h2 style="margin-top:0" data-i18n="d_t">Account &amp; Data Deletion</h2>
+    <p data-i18n="d_d">How to delete your account and what is removed.</p>
+  </a>
+  <a class="card" style="display:block;text-decoration:none;color:inherit" href="./support.html">
+    <h2 style="margin-top:0" data-i18n="s_t">Support</h2>
+    <p data-i18n="s_d">Contact channels and frequently asked questions.</p>
+  </a>
+</main>
+
+<footer class="site-footer">
+  <div class="bar">
+    <span>© 2026 DuLa</span>
+    <span class="spacer"></span>
+    <a href="./privacy.html" data-i18n="f_privacy">Privacy Policy</a>
+    <a href="./account-deletion.html" data-i18n="f_deletion">Account Deletion</a>
+    <a href="./support.html" data-i18n="f_support">Support</a>
+  </div>
+</footer>
+
+<script>
+window.I18N = {
+  ru: {
+    brand_sub: "Цифровое управление залом",
+    title: "DuLa — Информация",
+    subtitle: "Официальные страницы мобильного приложения DuLa.",
+    m_t: "О DuLa", m_d: "Что делает DuLa, возможности и цена.",
+    p_t: "Политика конфиденциальности", p_d: "Какие данные мы собираем, как используем и ваши права.",
+    d_t: "Удаление аккаунта и данных", d_d: "Как удалить аккаунт и что удаляется.",
+    s_t: "Поддержка", s_d: "Каналы связи и частые вопросы.",
+    f_privacy: "Политика конфиденциальности", f_deletion: "Удаление аккаунта", f_support: "Поддержка"
+  },
+  ky: {
+    brand_sub: "Залды санариптик башкаруу",
+    title: "DuLa — Маалымат",
+    subtitle: "DuLa мобилдик колдонмосунун расмий беттери.",
+    m_t: "DuLa жөнүндө", m_d: "DuLa эмне кылат, мүмкүнчүлүктөр жана баасы.",
+    p_t: "Купуялык саясаты", p_d: "Кандай маалымат чогултабыз, кантип колдонобуз жана укуктарыңыз.",
+    d_t: "Аккаунтту жана маалыматты жоюу", d_d: "Аккаунтту кантип жоюу жана эмне өчүрүлөт.",
+    s_t: "Колдоо", s_d: "Байланыш каналдары жана көп берилүүчү суроолор.",
+    f_privacy: "Купуялык саясаты", f_deletion: "Аккаунтту жоюу", f_support: "Колдоо"
+  }
+};
+</script>
+<script src="./assets/i18n.js"></script>
+</body>
+</html>

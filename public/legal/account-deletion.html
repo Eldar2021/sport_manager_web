@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DuLa — Account &amp; Data Deletion</title>
+<meta name="description" content="How to delete your DuLa account and data, what is removed, and how to request deletion if you cannot access the app.">
+<meta name="robots" content="index, follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" href="./assets/logo.svg">
+<link rel="stylesheet" href="./assets/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="bar">
+    <a class="brand" href="./index.html"><img src="./assets/logo.svg" alt="">
+      <span>DuLa<small data-i18n="brand_sub">Digital hall management</small></span></a>
+    <span class="spacer"></span>
+    <div class="lang-switch" role="group" aria-label="Language">
+      <button type="button" data-lang="en" aria-pressed="true">EN</button>
+      <button type="button" data-lang="ru" aria-pressed="false">РУС</button>
+      <button type="button" data-lang="ky" aria-pressed="false">КЫР</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <h1 data-i18n="title">Account &amp; Data Deletion</h1>
+  <p class="meta" data-i18n="appname">App: DuLa — Digital hall management</p>
+
+  <section class="card">
+    <p data-i18n="intro">You can permanently delete your DuLa account and associated data directly from inside the app, at any time. No email or web form is required.</p>
+  </section>
+
+  <h2 data-i18n="h_steps">How to delete your account in the app</h2>
+  <ol class="steps" data-i18n="ol_steps">
+    <li>Open the DuLa app and sign in.</li>
+    <li>Go to the <strong>Profile</strong> tab (bottom-right of the screen).</li>
+    <li>Scroll to the bottom and tap <strong>“Delete account”</strong>.</li>
+    <li>A confirmation sheet appears: <em>“Delete account? All data, sessions and settings will be permanently deleted. This action cannot be undone.”</em></li>
+    <li>Tap <strong>“Delete forever”</strong> to confirm. Your account is deleted immediately.</li>
+  </ol>
+
+  <h2 data-i18n="h_what">What gets deleted</h2>
+  <div class="card">
+    <h3 data-i18n="h_owner">Owner accounts</h3>
+    <p data-i18n="p_owner">When an <strong>owner</strong> deletes their account, the account and <strong>all related data — venues, tables, sessions, revenue and reports — are deleted immediately and permanently</strong>. This action cannot be undone.</p>
+    <h3 data-i18n="h_manager">Manager accounts</h3>
+    <p data-i18n="p_manager">When a <strong>manager</strong> deletes their account, the account is removed and the manager can no longer sign in. The sessions and report records the manager created are <strong>kept</strong> so the owner's business analytics remain accurate. Those records are deleted when the owner deletes them or deletes the owner account.</p>
+  </div>
+
+  <div class="callout"><p data-i18n="note_backup">Backup copies are fully purged within 30 days of deletion.</p></div>
+
+  <h2 data-i18n="h_noaccess">Can't access the app?</h2>
+  <p data-i18n="p_noaccess">If you cannot sign in (lost device, forgotten credentials), send a deletion request from your registered email to <a href="mailto:eldiiaralmazbekov@gmail.com?subject=DuLa%20account%20deletion%20request">eldiiaralmazbekov@gmail.com</a>, or contact +996 990 039 301 (WhatsApp / Telegram). We will verify your identity and delete the account within 30 days.</p>
+
+  <p style="margin-top:32px"><a class="btn secondary" href="./privacy.html" data-i18n="back_privacy">Read the Privacy Policy</a></p>
+</main>
+
+<footer class="site-footer">
+  <div class="bar">
+    <span>© 2026 DuLa</span>
+    <span class="spacer"></span>
+    <a href="./privacy.html" data-i18n="f_privacy">Privacy Policy</a>
+    <a href="./account-deletion.html" data-i18n="f_deletion">Account Deletion</a>
+    <a href="./support.html" data-i18n="f_support">Support</a>
+  </div>
+</footer>
+
+<script>
+window.I18N = {
+  ru: {
+    brand_sub: "Цифровое управление залом",
+    title: "Удаление аккаунта и данных",
+    appname: "Приложение: DuLa — Цифровое управление залом",
+    intro: "Вы можете в любой момент безвозвратно удалить аккаунт DuLa и связанные данные прямо в приложении. Email или веб-форма не требуются.",
+    h_steps: "Как удалить аккаунт в приложении",
+    ol_steps: "<li>Откройте приложение DuLa и войдите.</li><li>Перейдите на вкладку <strong>«Профиль»</strong> (внизу справа).</li><li>Прокрутите вниз и нажмите <strong>«Удалить аккаунт»</strong>.</li><li>Появится подтверждение: <em>«Удалить аккаунт? Все данные, сессии и настройки будут безвозвратно удалены. Это действие нельзя отменить.»</em></li><li>Нажмите <strong>«Удалить навсегда»</strong> для подтверждения. Аккаунт удаляется немедленно.</li>",
+    h_what: "Что удаляется",
+    h_owner: "Аккаунты владельца",
+    p_owner: "Когда <strong>владелец</strong> удаляет аккаунт, аккаунт и <strong>все связанные данные — заведения, столы, сессии, выручка и отчёты — удаляются немедленно и безвозвратно</strong>. Это действие нельзя отменить.",
+    h_manager: "Аккаунты менеджера",
+    p_manager: "Когда <strong>менеджер</strong> удаляет аккаунт, аккаунт удаляется и менеджер больше не может войти. Созданные менеджером сессии и отчёты <strong>сохраняются</strong>, чтобы бизнес-аналитика владельца оставалась точной. Эти записи удаляются, когда владелец удаляет их или свой аккаунт.",
+    note_backup: "Резервные копии полностью очищаются в течение 30 дней после удаления.",
+    h_noaccess: "Нет доступа к приложению?",
+    p_noaccess: "Если вы не можете войти (потеря устройства, забытые данные), отправьте запрос на удаление с вашего зарегистрированного email на <a href=\"mailto:eldiiaralmazbekov@gmail.com?subject=DuLa%20account%20deletion%20request\">eldiiaralmazbekov@gmail.com</a> или свяжитесь +996 990 039 301 (WhatsApp / Telegram). Мы проверим личность и удалим аккаунт в течение 30 дней.",
+    back_privacy: "Читать политику конфиденциальности",
+    f_privacy: "Политика конфиденциальности",
+    f_deletion: "Удаление аккаунта",
+    f_support: "Поддержка"
+  },
+  ky: {
+    brand_sub: "Залды санариптик башкаруу",
+    title: "Аккаунтту жана маалыматты жоюу",
+    appname: "Колдонмо: DuLa — Залды санариптик башкаруу",
+    intro: "Сиз каалаган убакта DuLa аккаунтуңузду жана байланышкан маалыматты колдонмонун өзүндө биротоло жоё аласыз. Email же веб-форма талап кылынбайт.",
+    h_steps: "Колдонмодо аккаунтту кантип жоюу керек",
+    ol_steps: "<li>DuLa колдонмосун ачып, кириңиз.</li><li><strong>«Профиль»</strong> өтмөгүнө өтүңүз (экрандын ылдый оң жагы).</li><li>Ылдый түшүп, <strong>«Аккаунтту жоюу»</strong> басыңыз.</li><li>Ырастоо чыгат: <em>«Аккаунтту жоёсузбу? Бардык маалымат, сессиялар жана жөндөөлөр биротоло жоюлат. Бул аракетти артка кайтарууга болбойт.»</em></li><li>Ырастоо үчүн <strong>«Биротоло жоюу»</strong> басыңыз. Аккаунт дароо жоюлат.</li>",
+    h_what: "Эмне жоюлат",
+    h_owner: "Ээсинин аккаунту",
+    p_owner: "<strong>Ээси</strong> аккаунтун жойгондо, аккаунт жана <strong>бардык байланышкан маалымат — жайлар, столдор, сессиялар, киреше жана отчёттор — дароо жана биротоло жоюлат</strong>. Бул аракетти артка кайтарууга болбойт.",
+    h_manager: "Менеджердин аккаунту",
+    p_manager: "<strong>Менеджер</strong> аккаунтун жойгондо, аккаунт өчүрүлөт жана менеджер кайра кире албайт. Менеджер түзгөн сессиялар жана отчёттор ээсинин бизнес-аналитикасы так болушу үчүн <strong>сакталат</strong>. Бул жазуулар ээси аларды же өз аккаунтун жойгондо жоюлат.",
+    note_backup: "Камдык көчүрмөлөр жоюлгандан кийин 30 күндүн ичинде толук тазаланат.",
+    h_noaccess: "Колдонмого кире албай жатасызбы?",
+    p_noaccess: "Эгер кире албасаңыз (түзмөк жоголду, маалымат унутулду), катталган email'иңизден жоюу өтүнүчүн <a href=\"mailto:eldiiaralmazbekov@gmail.com?subject=DuLa%20account%20deletion%20request\">eldiiaralmazbekov@gmail.com</a> дарегине жөнөтүңүз же +996 990 039 301 (WhatsApp / Telegram) менен байланышыңыз. Биз ким экениңизди текшерип, аккаунтту 30 күндүн ичинде жоёбуз.",
+    back_privacy: "Купуялык саясатын окуу",
+    f_privacy: "Купуялык саясаты",
+    f_deletion: "Аккаунтту жоюу",
+    f_support: "Колдоо"
+  }
+};
+</script>
+<script src="./assets/i18n.js"></script>
+</body>
+</html>

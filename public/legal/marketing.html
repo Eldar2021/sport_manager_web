@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DuLa — Digital hall management</title>
+<meta name="description" content="DuLa turns hourly halls digital: start/stop tables, automatic time and price, discounts, owner reports, multi-venue. 1000 som / venue / month.">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="DuLa — Digital hall management">
+<meta property="og:description" content="Know your manager isn't stealing from you — for 1000 som a month.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" href="./assets/logo.svg">
+<link rel="stylesheet" href="./assets/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="bar">
+    <a class="brand" href="./index.html"><img src="./assets/logo.svg" alt="">
+      <span>DuLa<small data-i18n="brand_sub">Digital hall management</small></span></a>
+    <span class="spacer"></span>
+    <div class="lang-switch" role="group" aria-label="Language">
+      <button type="button" data-lang="en" aria-pressed="true">EN</button>
+      <button type="button" data-lang="ru" aria-pressed="false">РУС</button>
+      <button type="button" data-lang="ky" aria-pressed="false">КЫР</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <img src="./assets/logo.svg" alt="DuLa">
+    <h1 data-i18n="hero_title">DuLa</h1>
+    <p class="tag" data-i18n="hero_tag">Know that your manager isn't stealing from you — for 1000 som a month. Goodbye calculator, goodbye arguments with customers.</p>
+    <div class="cta-row">
+      <a class="btn" href="#" aria-disabled="true" data-i18n="cta_play">Get it on Google Play</a>
+      <a class="btn secondary" href="#" aria-disabled="true" data-i18n="cta_ios">Download on the App Store</a>
+    </div>
+  </section>
+
+  <h2 data-i18n="h_problem">The problem</h2>
+  <p data-i18n="p_problem">Billiards, table tennis and chess halls still track table time on paper. The result: calculation errors and arguments with customers, managers "forgetting" to write down hours, and owners with no idea how their business really performs.</p>
+
+  <h2 data-i18n="h_solution">The solution</h2>
+  <p data-i18n="p_solution">DuLa runs on the manager's phone, calculates table time automatically, and gives the owner real-time revenue and usage reports.</p>
+
+  <h2 data-i18n="h_features">Features</h2>
+  <div class="features">
+    <div class="feature"><h3 data-i18n="f1_t">Start / Stop tables</h3><p data-i18n="f1_d">One big button. Tap to start, tap to finish — a live timer runs on every table.</p></div>
+    <div class="feature"><h3 data-i18n="f2_t">Automatic time &amp; price</h3><p data-i18n="f2_d">Duration and amount due are calculated automatically. No more mental math.</p></div>
+    <div class="feature"><h3 data-i18n="f3_t">Discounts</h3><p data-i18n="f3_d">Apply a discount when closing a session; the total updates instantly.</p></div>
+    <div class="feature"><h3 data-i18n="f4_t">Owner reports</h3><p data-i18n="f4_d">Revenue by day, table and manager — see your busiest hours at a glance.</p></div>
+    <div class="feature"><h3 data-i18n="f5_t">Multi-venue</h3><p data-i18n="f5_d">Manage several halls from one account and switch venues in a tap.</p></div>
+    <div class="feature"><h3 data-i18n="f6_t">Manager invite codes</h3><p data-i18n="f6_d">Owners invite managers with a code — no one joins your business uninvited.</p></div>
+  </div>
+
+  <h2 data-i18n="h_pricing">Pricing</h2>
+  <div class="price-box">
+    <div class="amount" data-i18n="price_amount">1000 som</div>
+    <p data-i18n="price_unit">per venue, per month</p>
+    <p data-i18n="price_trial">14-day free trial for new owners</p>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="bar">
+    <span>© 2026 DuLa</span>
+    <span class="spacer"></span>
+    <a href="./privacy.html" data-i18n="f_privacy">Privacy Policy</a>
+    <a href="./account-deletion.html" data-i18n="f_deletion">Account Deletion</a>
+    <a href="./support.html" data-i18n="f_support">Support</a>
+  </div>
+</footer>
+
+<script>
+window.I18N = {
+  ru: {
+    brand_sub: "Цифровое управление залом",
+    hero_title: "DuLa",
+    hero_tag: "Знайте, что менеджер вас не обкрадывает — за 1000 сом в месяц. Прощай, калькулятор, прощайте, споры с клиентами.",
+    cta_play: "Скачать в Google Play",
+    cta_ios: "Загрузить в App Store",
+    h_problem: "Проблема",
+    p_problem: "Залы бильярда, настольного тенниса и шахмат до сих пор ведут учёт времени столов на бумаге. Итог: ошибки в расчётах и споры с клиентами, менеджеры «забывают» записать часы, а владелец не знает, как реально работает его бизнес.",
+    h_solution: "Решение",
+    p_solution: "DuLa работает на телефоне менеджера, автоматически считает время стола и даёт владельцу отчёты о выручке и загрузке в реальном времени.",
+    h_features: "Возможности",
+    f1_t: "Старт / Стоп столов",
+    f1_d: "Одна большая кнопка. Нажал — начал, нажал — закончил; на каждом столе живой таймер.",
+    f2_t: "Авто время и цена",
+    f2_d: "Длительность и сумма считаются автоматически. Больше никакой математики в уме.",
+    f3_t: "Скидки",
+    f3_d: "Примените скидку при закрытии сессии — итог обновится мгновенно.",
+    f4_t: "Отчёты владельца",
+    f4_d: "Выручка по дням, столам и менеджерам — самые загруженные часы как на ладони.",
+    f5_t: "Несколько заведений",
+    f5_d: "Управляйте несколькими залами с одного аккаунта и переключайтесь одним касанием.",
+    f6_t: "Коды-приглашения",
+    f6_d: "Владелец приглашает менеджеров по коду — никто не войдёт в бизнес без приглашения.",
+    h_pricing: "Цена",
+    price_amount: "1000 сом",
+    price_unit: "за заведение в месяц",
+    price_trial: "14 дней бесплатно для новых владельцев",
+    f_privacy: "Политика конфиденциальности",
+    f_deletion: "Удаление аккаунта",
+    f_support: "Поддержка"
+  },
+  ky: {
+    brand_sub: "Залды санариптик башкаруу",
+    hero_title: "DuLa",
+    hero_tag: "Менеджериңиз сизди алдабай жатканын билиңиз — айына 1000 сомго. Калькулятор менен кош, кардарлар менен талаш-тартыш менен кош.",
+    cta_play: "Google Play'ден жүктөө",
+    cta_ios: "App Store'дон жүктөө",
+    h_problem: "Көйгөй",
+    p_problem: "Бильярд, үстөл теннис жана шахмат залдары стол убактысын дагы эле кагазга жазып эсептешет. Натыйжада: эсеп каталары жана кардарлар менен талаш, менеджерлер сааттарды жазууну «унутушат», ээси бизнеси чындыгында кандай иштеп жатканын билбейт.",
+    h_solution: "Чечим",
+    p_solution: "DuLa менеджердин телефонунда иштейт, стол убактысын автоматтык эсептейт жана ээсине реалдуу убакыттагы киреше жана жүктөм отчётторун берет.",
+    h_features: "Мүмкүнчүлүктөр",
+    f1_t: "Столду баштоо / токтотуу",
+    f1_d: "Бир чоң баскыч. Бастыңыз — баштадыңыз, бастыңыз — бүттүңүз; ар бир столдо тирүү таймер.",
+    f2_t: "Авто убакыт жана баа",
+    f2_d: "Узактык жана төлөнүүчү сумма автоматтык эсептелет. Эми оюда эсептөө жок.",
+    f3_t: "Арзандатуулар",
+    f3_d: "Сессияны жапканда арзандатуу колдонуңуз — жыйынтык дароо жаңырат.",
+    f4_t: "Ээсинин отчётторү",
+    f4_d: "Күн, стол жана менеджер боюнча киреше — эң тыгыз сааттар алакандай көрүнөт.",
+    f5_t: "Бир нече жай",
+    f5_d: "Бир аккаунттан бир нече залды башкарыңыз жана бир тийүү менен алмаштырыңыз.",
+    f6_t: "Чакыруу коддору",
+    f6_d: "Ээси менеджерлерди код менен чакырат — эч ким чакыруусуз бизнеске кирбейт.",
+    h_pricing: "Баасы",
+    price_amount: "1000 сом",
+    price_unit: "бир жайга айына",
+    price_trial: "Жаңы ээлер үчүн 14 күн акысыз",
+    f_privacy: "Купуялык саясаты",
+    f_deletion: "Аккаунтту жоюу",
+    f_support: "Колдоо"
+  }
+};
+</script>
+<script src="./assets/i18n.js"></script>
+</body>
+</html>
